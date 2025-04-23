@@ -131,8 +131,22 @@ final class LoginViewController: UIViewController {
         textField.layer.borderWidth = 0
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let idOn = idTextField.text, !idOn.isEmpty,
+           let passwordOn = passwordTextField.text, !passwordOn.isEmpty{
+            
+            loginButton.backgroundColor = UIColor(named: "red")
+            loginButton.setTitleColor(UIColor(named: "white"), for: .normal)
+        }
+        else {
+            loginButton.backgroundColor = UIColor(named: "gray4")
+            loginButton.setTitleColor(UIColor(named: "gray2"), for: .normal)
+        }
+    }
+    
     @objc func clearPasswordTextField() {
         passwordTextField.text = ""
+        textFieldDidChange(passwordTextField)
     }
     
     @objc func togglePasswordVisibility() {
@@ -176,6 +190,7 @@ final class LoginViewController: UIViewController {
         textField.leftViewMode = .always
         textField.addTarget(self, action: #selector(textFieldDidBegin), for: .editingDidBegin)
         textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     } ()
     
@@ -191,6 +206,7 @@ final class LoginViewController: UIViewController {
         textField.isSecureTextEntry = true
         textField.addTarget(self, action: #selector(textFieldDidBegin), for: .editingDidBegin)
         textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return textField
     } ()
     
