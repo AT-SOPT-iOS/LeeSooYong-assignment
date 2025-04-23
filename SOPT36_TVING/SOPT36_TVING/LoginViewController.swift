@@ -7,7 +7,10 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, DataBindDelegate {
+    func dataBind(id: String) {
+        idTextField.text = id
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +104,8 @@ class LoginViewController: UIViewController {
     
     private func pushToWelcomeVC() {
         let welcomeVC = WelcomeViewController()
+        welcomeVC.delegate = self
+        welcomeVC.id = idTextField.text
         self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
     

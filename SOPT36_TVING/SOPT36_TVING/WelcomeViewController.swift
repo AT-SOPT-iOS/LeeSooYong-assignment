@@ -9,6 +9,8 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    weak var delegate: DataBindDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,6 +18,15 @@ class WelcomeViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         
         setLayout()
+        
+        bindID()
+    }
+    
+    var id: String?
+    
+    private func bindID() {
+        guard let id = id else { return }
+        self.welcomeLabel.text = "\(id)님 \n 반가워요!"
     }
     
     let width = UIScreen.main.bounds.width
@@ -46,11 +57,12 @@ class WelcomeViewController: UIViewController {
     
     @objc
     private func backToMainDidTapped() {
-        if self.navigationController == nil {
-            self.dismiss(animated: true)
-        } else {
-            self.navigationController?.popToRootViewController(animated: true)
+        
+        if let id = id {
+            delegate? .dataBind(id: id)
         }
+        
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     private let tvingImageView: UIImageView = {
@@ -80,4 +92,8 @@ class WelcomeViewController: UIViewController {
         button.addTarget(self, action: #selector(backToMainDidTapped), for: .touchUpInside)
         return button
     } ()
+}
+
+protocol DataBindDelegate: AnyObject {
+    func dataBind(id: String)
 }
