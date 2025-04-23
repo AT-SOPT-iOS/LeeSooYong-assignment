@@ -43,6 +43,15 @@ class WelcomeViewController: UIViewController {
         ])
     }
     
+    @objc
+    private func backToMainDidTapped() {
+        if self.navigationController == nil {
+            self.dismiss(animated: true)
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     private let tvingImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "TVING")
@@ -67,6 +76,7 @@ class WelcomeViewController: UIViewController {
         button.layer.cornerRadius = 3
         button.setTitleColor(UIColor(named: "white"), for: .normal)
         button.titleLabel?.font = UIFont.pretendard(size: 14, weight: .bold)
+        button.addTarget(self, action: #selector(backToMainDidTapped), for: .touchUpInside)
         return button
     } ()
 }
