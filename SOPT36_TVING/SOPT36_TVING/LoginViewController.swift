@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            backBtnImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 100),
+            backBtnImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
             backBtnImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
             backBtnImageView.widthAnchor.constraint(equalToConstant: 8),
             backBtnImageView.heightAnchor.constraint(equalToConstant: 15)
