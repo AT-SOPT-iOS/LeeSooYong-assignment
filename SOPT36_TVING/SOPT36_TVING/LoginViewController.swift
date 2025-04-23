@@ -16,6 +16,7 @@ final class LoginViewController: UIViewController, DataBindDelegate {
         super.viewDidLoad()
         
         self.view.backgroundColor = .black
+        self.idTextField.autocapitalizationType = .none
         
         idTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
         passwordTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
