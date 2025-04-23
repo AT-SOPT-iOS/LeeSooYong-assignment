@@ -13,6 +13,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = .black
+        self.navigationItem.hidesBackButton = true
         
         setLayout()
     }
@@ -26,7 +27,7 @@ class WelcomeViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            tvingImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            tvingImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30),
             tvingImageView.widthAnchor.constraint(equalToConstant: width),
         ])
         
