@@ -114,6 +114,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "아이디"
         textField.font = UIFont.pretendard(size: 15, weight: .bold)
+        textField.textColor = UIColor(named: "gray2")
         textField.layer.cornerRadius = 3
         textField.backgroundColor = UIColor(named: "gray4")
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
@@ -125,6 +126,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "비밀번호"
         textField.font = UIFont.pretendard(size: 15, weight: .bold)
+        textField.textColor = UIColor(named: "gray2")
         textField.layer.cornerRadius = 3
         textField.backgroundColor = UIColor(named: "gray4")
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
