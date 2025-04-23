@@ -9,8 +9,6 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
-    weak var delegate: DataBindDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,11 +55,6 @@ class WelcomeViewController: UIViewController {
     
     @objc
     private func backToMainDidTapped() {
-        
-        if let id = id {
-            delegate? .dataBind(id: id)
-        }
-        
         self.navigationController?.popToRootViewController(animated: true)
     }
     
@@ -92,8 +85,4 @@ class WelcomeViewController: UIViewController {
         button.addTarget(self, action: #selector(backToMainDidTapped), for: .touchUpInside)
         return button
     } ()
-}
-
-protocol DataBindDelegate: AnyObject {
-    func dataBind(id: String)
 }

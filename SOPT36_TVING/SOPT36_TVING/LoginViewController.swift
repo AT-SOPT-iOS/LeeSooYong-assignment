@@ -7,25 +7,23 @@
 
 import UIKit
 
-final class LoginViewController: UIViewController, DataBindDelegate {
-    func dataBind(id: String) {
-        idTextField.text = id
-    }
+final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .black
         self.idTextField.autocapitalizationType = .none
-        
+        self.passwordTextField.autocapitalizationType = .none
         idTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
         passwordTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
-        
+        eyeButton.isHidden = false
+        slashButton.isHidden = true
         setLayout()
     }
     
     private func setLayout() {
-        [backBtnImageView, titleLabel, idTextField, passwordTextField, loginButton
+        [backBtnImageView, titleLabel, idTextField, passwordTextField, xButton, eyeButton, slashButton, loginButton
          ,findIdButton, divideLine, findPwButton, noAccountButton, nickButton].forEach {
             self.view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -55,6 +53,27 @@ final class LoginViewController: UIViewController, DataBindDelegate {
             passwordTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             passwordTextField.widthAnchor.constraint(equalToConstant: 335),
             passwordTextField.heightAnchor.constraint(equalToConstant: 52)
+        ])
+        
+        NSLayoutConstraint.activate([
+            xButton.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
+            xButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -40),
+            xButton.widthAnchor.constraint(equalToConstant: 20),
+            xButton.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            eyeButton.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
+            eyeButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -15),
+            eyeButton.widthAnchor.constraint(equalToConstant: 20),
+            eyeButton.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            slashButton.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
+            slashButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -15),
+            slashButton.widthAnchor.constraint(equalToConstant: 20),
+            slashButton.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
@@ -103,9 +122,29 @@ final class LoginViewController: UIViewController, DataBindDelegate {
         pushToWelcomeVC()
     }
     
+    @objc func textFieldDidBegin(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.gray2.cgColor
+        textField.layer.borderWidth = 1
+    }
+    
+    @objc func textFieldDidEnd(_ textField: UITextField) {
+        textField.layer.borderWidth = 0
+    }
+    
+    @objc func clearPasswordTextField() {
+        passwordTextField.text = ""
+    }
+    
+    @objc func togglePasswordVisibility() {
+        passwordTextField.isSecureTextEntry.toggle()
+            
+        let isHidden = passwordTextField.isSecureTextEntry
+        eyeButton.isHidden = !isHidden
+        slashButton.isHidden = isHidden
+    }
+    
     private func pushToWelcomeVC() {
         let welcomeVC = WelcomeViewController()
-        welcomeVC.delegate = self
         welcomeVC.id = idTextField.text
         self.navigationController?.pushViewController(welcomeVC, animated: true)
     }
@@ -135,6 +174,8 @@ final class LoginViewController: UIViewController, DataBindDelegate {
         textField.backgroundColor = UIColor(named: "gray4")
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
         textField.leftViewMode = .always
+        textField.addTarget(self, action: #selector(textFieldDidBegin), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
         return textField
     } ()
     
@@ -147,7 +188,37 @@ final class LoginViewController: UIViewController, DataBindDelegate {
         textField.backgroundColor = UIColor(named: "gray4")
         textField.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 15.0, height: 0.0))
         textField.leftViewMode = .always
+        textField.isSecureTextEntry = true
+        textField.addTarget(self, action: #selector(textFieldDidBegin), for: .editingDidBegin)
+        textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
         return textField
+    } ()
+    
+    private let xButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "x")
+        button.setImage(image, for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(clearPasswordTextField), for: .touchUpInside)
+        return button
+    } ()
+    
+    private let eyeButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "eye")
+        button.setImage(image, for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        return button
+    } ()
+    
+    private let slashButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "eye_slash")
+        button.setImage(image, for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(togglePasswordVisibility), for: .touchUpInside)
+        return button
     } ()
     
     private let loginButton: UIButton = {
