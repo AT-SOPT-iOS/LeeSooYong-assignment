@@ -135,7 +135,8 @@ class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "black")
-        button.setTitle("로그인", for: .normal)
+        button.setTitle("로그인하기", for: .normal)
+        button.setTitleColor(UIColor(named: "gray2"), for: .normal)
         button.titleLabel?.font = UIFont.pretendard(size: 14, weight: .bold)
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
