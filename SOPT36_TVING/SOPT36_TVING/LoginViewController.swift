@@ -28,7 +28,7 @@ class LoginViewController: UIViewController {
         }
         
         NSLayoutConstraint.activate([
-            backBtnImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            backBtnImageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             backBtnImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
             backBtnImageView.widthAnchor.constraint(equalToConstant: 8),
             backBtnImageView.heightAnchor.constraint(equalToConstant: 15)
@@ -94,6 +94,16 @@ class LoginViewController: UIViewController {
 
     }
     
+    @objc
+    private func loginButtonDidTapped() {
+        pushToWelcomeVC()
+    }
+    
+    private func pushToWelcomeVC() {
+        let welcomeVC = WelcomeViewController()
+        self.navigationController?.pushViewController(welcomeVC, animated: true)
+    }
+    
     private let backBtnImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "before")
@@ -143,6 +153,7 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 3
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(named: "gray4")?.cgColor
+        button.addTarget(self, action: #selector(loginButtonDidTapped), for: .touchUpInside)
         return button
     } ()
     
