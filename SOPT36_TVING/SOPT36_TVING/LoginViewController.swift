@@ -17,8 +17,10 @@ final class LoginViewController: UIViewController {
         self.passwordTextField.autocapitalizationType = .none
         idTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
         passwordTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
-        eyeButton.isHidden = false
-        slashButton.isHidden = true
+        [idxButton, pwxButton, eyeButton, slashButton].forEach {
+            self.view.addSubview($0)
+            $0.isHidden = true
+        }
         setLayout()
     }
     
@@ -64,7 +66,7 @@ final class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             pwxButton.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
-            pwxButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -40),
+            pwxButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -45),
             pwxButton.widthAnchor.constraint(equalToConstant: 20),
             pwxButton.heightAnchor.constraint(equalToConstant: 20)
         ])
@@ -151,13 +153,27 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    @objc func buttonVisible(_ textField: UITextField) {
+        if let idOn = idTextField.text, !idOn.isEmpty {
+            idxButton.isHidden = false
+        }
+        if let passwordOn = passwordTextField.text, !passwordOn.isEmpty {
+            pwxButton.isHidden = false
+            eyeButton.isHidden = false
+        }
+    }
+    
     @objc func clearIdTextField() {
         idTextField.text = ""
+        idxButton.isHidden = true
     }
     
     @objc func clearPasswordTextField() {
         passwordTextField.text = ""
         textFieldDidChange(passwordTextField)
+        pwxButton.isHidden = true
+        eyeButton.isHidden = true
+        slashButton.isHidden = true
     }
     
     @objc func togglePasswordVisibility() {
@@ -202,6 +218,7 @@ final class LoginViewController: UIViewController {
         textField.addTarget(self, action: #selector(textFieldDidBegin), for: .editingDidBegin)
         textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(buttonVisible), for: .editingChanged)
         return textField
     } ()
     
@@ -218,6 +235,7 @@ final class LoginViewController: UIViewController {
         textField.addTarget(self, action: #selector(textFieldDidBegin), for: .editingDidBegin)
         textField.addTarget(self, action: #selector(textFieldDidEnd), for: .editingDidEnd)
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(buttonVisible), for: .editingChanged)
         return textField
     } ()
     
