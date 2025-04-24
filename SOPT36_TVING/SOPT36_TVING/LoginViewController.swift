@@ -23,7 +23,7 @@ final class LoginViewController: UIViewController {
     }
     
     private func setLayout() {
-        [backBtnImageView, titleLabel, idTextField, passwordTextField, xButton, eyeButton, slashButton, loginButton
+        [backBtnImageView, titleLabel, idTextField, passwordTextField, idxButton, pwxButton, eyeButton, slashButton, loginButton
          ,findIdButton, divideLine, findPwButton, noAccountButton, nickButton].forEach {
             self.view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -56,10 +56,17 @@ final class LoginViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            xButton.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
-            xButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -40),
-            xButton.widthAnchor.constraint(equalToConstant: 20),
-            xButton.heightAnchor.constraint(equalToConstant: 20)
+            idxButton.centerYAnchor.constraint(equalTo: self.idTextField.centerYAnchor),
+            idxButton.trailingAnchor.constraint(equalTo: self.idTextField.trailingAnchor, constant: -15),
+            idxButton.widthAnchor.constraint(equalToConstant: 20),
+            idxButton.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            pwxButton.centerYAnchor.constraint(equalTo: self.passwordTextField.centerYAnchor),
+            pwxButton.trailingAnchor.constraint(equalTo: self.passwordTextField.trailingAnchor, constant: -40),
+            pwxButton.widthAnchor.constraint(equalToConstant: 20),
+            pwxButton.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         NSLayoutConstraint.activate([
@@ -144,6 +151,10 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    @objc func clearIdTextField() {
+        idTextField.text = ""
+    }
+    
     @objc func clearPasswordTextField() {
         passwordTextField.text = ""
         textFieldDidChange(passwordTextField)
@@ -210,7 +221,16 @@ final class LoginViewController: UIViewController {
         return textField
     } ()
     
-    private let xButton: UIButton = {
+    private let idxButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "x")
+        button.setImage(image, for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(clearIdTextField), for: .touchUpInside)
+        return button
+    } ()
+    
+    private let pwxButton: UIButton = {
         let button = UIButton()
         let image = UIImage(named: "x")
         button.setImage(image, for: .normal)
