@@ -72,7 +72,7 @@ class HeaderViewController: UIViewController {
         }
         
         titleImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(16)
             $0.leading.equalToSuperview().offset(10)
             $0.width.equalTo(192)
             $0.height.equalTo(78)

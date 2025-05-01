@@ -49,7 +49,7 @@ final class KghViewController: UIViewController {
         
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(16)
-            $0.top.equalToSuperview().offset(80)
+            $0.top.equalToSuperview().offset(16)
         }
         
         collectionView.snp.makeConstraints {

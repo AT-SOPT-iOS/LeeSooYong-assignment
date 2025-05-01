@@ -43,8 +43,7 @@ final class CateViewController: UIViewController {
         
         collectionView.snp.makeConstraints {
             $0.trailing.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.leading.equalToSuperview().offset(16)
             $0.height.equalTo(cellHeight)
         }
     }
