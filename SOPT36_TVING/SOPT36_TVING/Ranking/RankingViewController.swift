@@ -19,7 +19,7 @@ final class RankingViewController: UIViewController {
         let label = UILabel()
         label.text = "오늘의 티빙 TOP 20"
         label.textColor = .white
-        label.font = UIFont.pretendard(size: 20, weight: .bold)
+        label.font = UIFont.pretendard(size: 15, weight: .bold)
         return label
     }()
     
@@ -54,7 +54,7 @@ final class RankingViewController: UIViewController {
         
         collectionView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(15)
             $0.height.equalTo(cellHeight)
         }
     }
