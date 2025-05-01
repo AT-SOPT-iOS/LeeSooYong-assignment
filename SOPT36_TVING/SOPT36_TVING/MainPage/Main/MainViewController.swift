@@ -50,8 +50,9 @@ class MainViewController: UIViewController {
         let kboVC = KboViewController()
         let cateVC = CateViewController()
         let kghVC = KghViewController()
-
-        [headerVC, rankingVC, liveVC, movieVC, kboVC, cateVC, kghVC].forEach { addSection($0) }
+        let bottomVC = BottomViewController()
+        
+        [headerVC, rankingVC, liveVC, movieVC, kboVC, cateVC, kghVC, bottomVC].forEach { addSection($0) }
     }
 
     private func addSection(_ childVC: UIViewController) {
@@ -73,6 +74,8 @@ class MainViewController: UIViewController {
             childVC.view.snp.makeConstraints { $0.height.equalTo(180) }
         } else if childVC is CateViewController {
             childVC.view.snp.makeConstraints { $0.height.equalTo(50) }
+        } else if childVC is BottomViewController {
+            childVC.view.snp.makeConstraints { $0.height.equalTo(100) }
         }
     }
 }
