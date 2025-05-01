@@ -29,6 +29,7 @@ final class RankingViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .black
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     } ()
     

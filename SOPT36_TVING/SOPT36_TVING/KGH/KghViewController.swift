@@ -28,6 +28,7 @@ final class KghViewController: UIViewController {
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .black
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     } ()
     
