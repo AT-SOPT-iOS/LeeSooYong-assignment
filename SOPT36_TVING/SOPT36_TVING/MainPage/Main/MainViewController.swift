@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
         view.addSubview(scrollView)
 
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
         scrollView.addSubview(stackView)
@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
         stackView.spacing = 20
 
         stackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0))
             $0.width.equalToSuperview()
         }
     }
