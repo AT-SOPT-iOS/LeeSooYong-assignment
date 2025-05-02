@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-
+    
     private let scrollView = UIScrollView()
     private let stackView = UIStackView()
     
@@ -43,7 +43,24 @@ class MainViewController: UIViewController {
     }
 
     private func addAllSections() {
+        
+        let titleBarView = TitleBarView()
+            stackView.addArrangedSubview(titleBarView)
+            titleBarView.snp.makeConstraints {
+                $0.height.equalTo(55)
+            }
+        
         let headerVC = HeaderViewController()
+            addSection(headerVC)
+
+        let mainImageView = UIImageView(image: UIImage(named: "main"))
+        mainImageView.contentMode = .scaleAspectFill
+        mainImageView.clipsToBounds = true
+        stackView.addArrangedSubview(mainImageView)
+        mainImageView.snp.makeConstraints {
+            $0.height.equalTo(450)
+        }
+        
         let rankingVC = RankingViewController()
         let liveVC = LiveViewController()
         let movieVC = MovieViewController()
@@ -52,7 +69,7 @@ class MainViewController: UIViewController {
         let kghVC = KghViewController()
         let bottomVC = BottomViewController()
         
-        [headerVC, rankingVC, liveVC, movieVC, kboVC, cateVC, kghVC, bottomVC].forEach { addSection($0) }
+        [rankingVC, liveVC, movieVC, kboVC, cateVC, kghVC, bottomVC].forEach { addSection($0) }
     }
 
     private func addSection(_ childVC: UIViewController) {
@@ -61,7 +78,7 @@ class MainViewController: UIViewController {
         childVC.didMove(toParent: self)
 
         if childVC is HeaderViewController {
-            childVC.view.snp.makeConstraints { $0.height.equalTo(550) }
+            childVC.view.snp.makeConstraints { $0.height.equalTo(50) }
         } else if childVC is LiveViewController {
             childVC.view.snp.makeConstraints { $0.height.equalTo(150) }
         } else if childVC is MovieViewController {
