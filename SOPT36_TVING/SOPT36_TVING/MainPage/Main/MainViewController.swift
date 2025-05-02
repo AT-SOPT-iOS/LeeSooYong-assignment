@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+
 class MainViewController: UIViewController {
     
     private let scrollView = UIScrollView()
@@ -16,17 +17,41 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-
+        
+        setFixedView()
         setupScrollView()
         setupStackView()
         addAllSections()
+    }
+    
+    private func setFixedView() {
+        let fixedContainer = UIStackView()
+        fixedContainer.axis = .vertical
+        fixedContainer.spacing = 20
+        view.addSubview(fixedContainer)
+
+        fixedContainer.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+
+        let titleBarView = TitleBarView()
+        titleBarView.snp.makeConstraints { $0.height.equalTo(55) }
+        fixedContainer.addArrangedSubview(titleBarView)
+
+        let headerVC = HeaderViewController()
+        addChild(headerVC)
+        fixedContainer.addArrangedSubview(headerVC.view)
+        headerVC.didMove(toParent: self)
+        headerVC.view.snp.makeConstraints { $0.height.equalTo(50) }
     }
 
     private func setupScrollView() {
         view.addSubview(scrollView)
 
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(140)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
 
         scrollView.addSubview(stackView)
@@ -43,15 +68,6 @@ class MainViewController: UIViewController {
     }
 
     private func addAllSections() {
-        
-        let titleBarView = TitleBarView()
-            stackView.addArrangedSubview(titleBarView)
-            titleBarView.snp.makeConstraints {
-                $0.height.equalTo(55)
-            }
-        
-        let headerVC = HeaderViewController()
-            addSection(headerVC)
 
         let mainImageView = UIImageView(image: UIImage(named: "main"))
         mainImageView.contentMode = .scaleAspectFill
@@ -77,9 +93,7 @@ class MainViewController: UIViewController {
         stackView.addArrangedSubview(childVC.view)
         childVC.didMove(toParent: self)
 
-        if childVC is HeaderViewController {
-            childVC.view.snp.makeConstraints { $0.height.equalTo(50) }
-        } else if childVC is LiveViewController {
+       if childVC is LiveViewController {
             childVC.view.snp.makeConstraints { $0.height.equalTo(150) }
         } else if childVC is MovieViewController {
             childVC.view.snp.makeConstraints { $0.height.equalTo(200) }
@@ -95,4 +109,8 @@ class MainViewController: UIViewController {
             childVC.view.snp.makeConstraints { $0.height.equalTo(100) }
         }
     }
+}
+
+#Preview{
+    MainViewController()
 }
