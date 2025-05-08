@@ -42,7 +42,7 @@ final class OpenApiService {
         }
         
         do {
-            let decoded = try JSONDecoder().decode(OpenApiRequestBody.self, from: data)
+            let decoded = try JSONDecoder().decode(OpenApiResponseBody.self, from: data)
             return decoded.boxOfficeResult.dailyBoxOfficeList
         } catch {
             print("디코딩 실패:", error)

@@ -45,9 +45,19 @@ final class OpenApiViewController: UIViewController {
         self.view.backgroundColor = .black
         self.view.addSubview(stackView)
         
+        dateTextField.setPlaceholderColor(UIColor(named: "gray2") ?? .gray4)
+        
         stackView.snp.makeConstraints {
             $0.leading.trailing.equalTo(self.view.safeAreaLayoutGuide).inset(40)
-            $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(200)
+            $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(100)
+        }
+        
+        dateTextField.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+        
+        searchButton.snp.makeConstraints {
+            $0.height.equalTo(50)
         }
         
         [dateTextField, infoLabel, searchButton].forEach {
@@ -65,7 +75,8 @@ final class OpenApiViewController: UIViewController {
         $0.addTarget(self,
                      action: #selector(textFieldDidEditing(_:)),
                      for: .allEvents)
-        $0.backgroundColor = .gray2
+        $0.textColor = UIColor(named: "gray2")
+        $0.backgroundColor = .gray4
         $0.placeholder = "날짜를 입력하세요"
     }
     
@@ -73,14 +84,14 @@ final class OpenApiViewController: UIViewController {
         $0.textColor = .white
         $0.textAlignment = .left
         $0.numberOfLines = 0
-        $0.font = .systemFont(ofSize: 16)
+        $0.font = UIFont.pretendard(size: 16, weight: .semibold)
     }
     
     private lazy var searchButton = UIButton().then {
         $0.setTitle("검색", for: .normal)
         $0.backgroundColor = .red
         $0.titleLabel?.textColor = .white
-        $0.titleLabel?.font = UIFont.pretendard(size: 14, weight: .semibold)
+        $0.titleLabel?.font = UIFont.pretendard(size: 18, weight: .semibold)
         $0.addTarget(self, action: #selector(searchButtonTap), for: .touchUpInside)
     }
 }
