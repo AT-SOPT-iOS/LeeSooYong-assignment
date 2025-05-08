@@ -19,12 +19,7 @@ final class OpenApiViewController: UIViewController {
     }
     
     @objc private func textFieldDidEditing(_ textField: UITextField) {
-        switch textField {
-        case dateTextField:
-            targetDt = textField.text ?? ""
-        default:
-            targetDt = textField.text ?? ""
-        }
+        self.targetDt = textField.text ?? ""
     }
     
     @objc private func searchButtonTap() {
@@ -78,6 +73,7 @@ final class OpenApiViewController: UIViewController {
         $0.textColor = UIColor(named: "gray2")
         $0.backgroundColor = .gray4
         $0.placeholder = "날짜를 입력하세요"
+        $0.setLeftPadding(15)
     }
     
     private lazy var infoLabel = UILabel().then {
@@ -93,5 +89,13 @@ final class OpenApiViewController: UIViewController {
         $0.titleLabel?.textColor = .white
         $0.titleLabel?.font = UIFont.pretendard(size: 18, weight: .semibold)
         $0.addTarget(self, action: #selector(searchButtonTap), for: .touchUpInside)
+    }
+}
+
+private extension UITextField {
+    func setLeftPadding(_ amount: CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
     }
 }
