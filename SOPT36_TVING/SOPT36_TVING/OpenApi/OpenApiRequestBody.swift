@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OpenApiResponseBody: Codable {
+struct OpenApiRequestBody: Codable {
     let boxOfficeResult: BoxOfficeResult
 }
 
