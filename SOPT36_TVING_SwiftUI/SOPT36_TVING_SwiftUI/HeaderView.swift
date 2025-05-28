@@ -45,7 +45,6 @@ struct HeaderView: View {
                     }
                 }
             }
-            .padding(5)
         }
         .background(.black)
     }

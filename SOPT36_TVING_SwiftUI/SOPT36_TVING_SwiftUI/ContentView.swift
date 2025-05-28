@@ -8,15 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    let header = HeaderView()
+    let today = TodayView()
+    let live = LiveView()
+    let movie = MovieView()
+    let kbo = KboView()
+    let category = CategoryView()
+    let pd = PdView()
+    let bottom = BottomView()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            header
+            ScrollView() {
+                Image("main")
+                    .resizable()
+                    .frame(width: .infinity, height: 400)
+                today
+                live
+                movie
+                kbo
+                category
+                pd
+                bottom
+            }
+            .scrollIndicators(.hidden)
         }
-        .padding()
+        .background(.black)
     }
+
 }
 
 #Preview {
