@@ -40,7 +40,8 @@ struct BottomView: View {
                 .foregroundColor(.gray2)
             
         }
-        .padding(14)
+        .padding(.vertical, 14)
+        .padding(.horizontal, 8)
         .background(.black)
     }
 }
