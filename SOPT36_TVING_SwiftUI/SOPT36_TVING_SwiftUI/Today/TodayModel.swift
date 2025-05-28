@@ -11,7 +11,6 @@ struct TodayModel: Identifiable {
     let id = UUID()
     let rank: Int
     let image: String
-
 }
 
 let todayDummy: [TodayModel] = [
